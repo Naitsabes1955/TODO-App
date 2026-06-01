@@ -1,0 +1,126 @@
+[class^="task-card"] {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 1.125rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+
+.task-cardpending    { border-left: 4px solid var(--warning); }
+.task-cardinprogress { border-left: 4px solid var(--accent);  }
+.task-carddone       { border-left: 4px solid var(--success); opacity: 0.75; }
+
+/* Header row */
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+/* Status badge */
+[class^="task-status"] {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+.task-statuspending {
+  background: #fff3dc;
+  color: #8a5300;
+}
+
+.task-statusinprogress {
+  background: #dde8ff;
+  color: #1738a0;
+}
+
+.task-statusdone {
+  background: #d3f5e6;
+  color: #0e5c38;
+}
+
+/* Delete button */
+.task-card-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition);
+}
+
+.task-card-delete:hover {
+  background: #fde8e8;
+  color: var(--danger);
+}
+
+/* Title */
+.task-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--text);
+  margin-bottom: 0.875rem;
+  word-break: break-word;
+}
+
+/* Action buttons row */
+.task-card-init {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Shared task button */
+.task-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.task-btn:active { transform: scale(0.97); }
+
+.task-btn-start {
+  background: var(--accent);
+  color: #fff;
+}
+
+.task-btn-start:hover { background: var(--accent-hover); }
+
+.task-btn-finish {
+  background: var(--success);
+  color: #fff;
+}
+
+.task-btn-finish:hover { background: #146848; }
+
+/* Empty state */
+.task-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  border: 2px dotted var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  [class^="task-card"] {
+    padding: 1rem;
+  }
+
+  .task-card-title {
+    font-size: 0.95rem;
+  }
+}

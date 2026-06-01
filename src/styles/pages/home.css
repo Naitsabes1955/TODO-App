@@ -1,0 +1,63 @@
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 3rem;
+  background: var(--bg);
+}
+
+.home-header {
+  width: 100%;
+  max-width: 700px;
+  padding: 3rem 0 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.home-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.home-header h1::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background: var(--accent);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Form row */
+.home-form {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+
+/* Task list */
+.home-list {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+  .home-form {
+    flex-direction: column;
+  }
+
+  .home-header {
+    padding: 2rem 0 1rem;
+  }
+}
