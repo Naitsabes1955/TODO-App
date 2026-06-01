@@ -17,7 +17,7 @@ export default function Home() {
         createTask(trimmed);
         setTitle("");
     }
-
+    
     return (
     <div className="home">
         <header className="home-header">
