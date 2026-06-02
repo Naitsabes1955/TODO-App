@@ -1,3 +1,15 @@
+:root, .light-mode {
+  --bg-home: #ffffff;
+  --text-home: #111111;
+  --card-bg: #ffffff;
+}
+
+.dark-mode {
+  --bg-home: #121212;
+  --text-home: #ffffff;
+  --card-bg: #1e1e1e;
+}
+
 .home {
   min-height: 100vh;
   display: flex;
@@ -60,4 +72,16 @@
   .home-header {
     padding: 2rem 0 1rem;
   }
+}
+
+.home {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-home);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 20px;
+}
+
+.home-header h1 {
+  color: var(--text-home);
 }

@@ -6,6 +6,8 @@ import TaskEmpty from "../../components/task/TaskEmpty";
 import { useState } from "react";
 import { useTasks } from "../../hooks/useTask";
 import '@/styles/pages/home.css'
+import { WithIcons } from "@/components/ui/ToggleButton";
+
 
 export default function Home() {
     const [title, setTitle] = useState("");
@@ -20,6 +22,7 @@ export default function Home() {
     
     return (
     <div className="home">
+        <WithIcons></WithIcons>
         <header className="home-header">
             <h1>Task Timer</h1>
         </header>
