@@ -5,12 +5,10 @@
   box-shadow: var(--shadow-sm);
 }
 
-
 .task-cardpending    { border-left: 4px solid var(--warning); }
 .task-cardinprogress { border-left: 4px solid var(--accent);  }
 .task-carddone       { border-left: 4px solid var(--success); opacity: 0.75; }
 
-/* Header row */
 .task-card-header {
   display: flex;
   align-items: center;
@@ -18,7 +16,6 @@
   margin-bottom: 0.5rem;
 }
 
-/* Status badge */
 [class^="task-status"] {
   display: inline-block;
   font-size: 0.7rem;
@@ -29,22 +26,10 @@
   border-radius: 999px;
 }
 
-.task-statuspending {
-  background: #fff3dc;
-  color: #8a5300;
-}
+.task-statuspending    { background: #fff3dc; color: #8a5300; }
+.task-statusinprogress { background: #dde8ff; color: #1738a0; }
+.task-statusdone       { background: #d3f5e6; color: #0e5c38; }
 
-.task-statusinprogress {
-  background: #dde8ff;
-  color: #1738a0;
-}
-
-.task-statusdone {
-  background: #d3f5e6;
-  color: #0e5c38;
-}
-
-/* Delete button */
 .task-card-delete {
   display: flex;
   align-items: center;
@@ -62,23 +47,32 @@
   color: var(--danger);
 }
 
-/* Title */
 .task-card-title {
   font-size: 1rem;
   font-weight: 600;
   font-family: var(--font-body);
   color: var(--text);
-  margin-bottom: 0.875rem;
+  margin-bottom: 0.5rem;
   word-break: break-word;
 }
 
-/* Action buttons row */
+.task-card-timer {
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  margin-bottom: 0.875rem;
+}
+
+.task-card-timer.running {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .task-card-init {
   display: flex;
   gap: 0.5rem;
 }
 
-/* Shared task button */
 .task-btn {
   padding: 0.4rem 1rem;
   font-size: 0.8rem;
@@ -104,7 +98,6 @@
 
 .task-btn-finish:hover { background: #146848; }
 
-/* Empty state */
 .task-empty {
   text-align: center;
   padding: 3rem 1rem;
@@ -114,13 +107,7 @@
   border-radius: var(--radius-lg);
 }
 
-/* ─── Responsive ─── */
 @media (max-width: 480px) {
-  [class^="task-card"] {
-    padding: 1rem;
-  }
-
-  .task-card-title {
-    font-size: 0.95rem;
-  }
+  [class^="task-card"] { padding: 1rem; }
+  .task-card-title     { font-size: 0.95rem; }
 }

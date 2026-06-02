@@ -1,4 +1,8 @@
+export { useTaskContext as useTasks } from "@/context/TaskContext";
 
+
+
+/*
 import { useEffect, useState } from "react"
 
 import type {Task,TaskStatus,} from "../types/task"
@@ -103,4 +107,4 @@ function finishTask(id: string) {
   return {
     tasks,createTask,deleteTask,startTask,finishTask
   }
-}
+} */

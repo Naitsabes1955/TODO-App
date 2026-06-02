@@ -1,22 +1,13 @@
-:root, .light-mode {
-  --bg-home: #ffffff;
-  --text-home: #111111;
-  --card-bg: #ffffff;
-}
-
-.dark-mode {
-  --bg-home: #121212;
-  --text-home: #ffffff;
-  --card-bg: #1e1e1e;
-}
-
 .home {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 1rem 3rem;
   background: var(--bg);
+  color: var(--text);
+  transition: background var(--transition), color var(--transition);
 }
 
 .home-header {
@@ -44,7 +35,6 @@
   border-radius: 2px;
 }
 
-/* Form row */
 .home-form {
   width: 100%;
   max-width: 700px;
@@ -54,7 +44,6 @@
   margin-bottom: 2rem;
 }
 
-/* Task list */
 .home-list {
   width: 100%;
   max-width: 700px;
@@ -63,25 +52,11 @@
   gap: 0.875rem;
 }
 
-/* ─── Responsive ─── */
 @media (max-width: 600px) {
   .home-form {
     flex-direction: column;
   }
-
   .home-header {
     padding: 2rem 0 1rem;
   }
-}
-
-.home {
-  min-height: 100vh;
-  width: 100%;
-  background-color: var(--bg-home);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  padding: 20px;
-}
-
-.home-header h1 {
-  color: var(--text-home);
 }

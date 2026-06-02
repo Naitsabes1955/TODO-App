@@ -1,11 +1,19 @@
-import type { CardProps } from "../../types/card";
-import '../../styles/components/card.css'
+import { useTaskContext } from "../../context/TaskContext";
+import { useTimer, formatTime } from "../../hooks/useTimer";
+import type { Task } from "../../types/task";
+import "../../styles/components/card.css";
 
-export default function TaskCard({ task, onStart, onFinish, onDelete }: CardProps) {
-/*   const seconds = useTimer(task);
- */
+interface TaskCardProps {
+  task: Task;
+}
+
+export default function TaskCard({ task }: TaskCardProps) {
+  const { deleteTask, startTask, finishTask } = useTaskContext();
+
+  const seconds = useTimer(task);
+
   const statusLabel =
-    task.status === "Pending" ? "Pendiente" :
+    task.status === "Pending"    ? "Pendiente"   :
     task.status === "inProgress" ? "En progreso" :
     "Finalizada";
 
@@ -17,7 +25,7 @@ export default function TaskCard({ task, onStart, onFinish, onDelete }: CardProp
         </span>
         <button
           className="task-card-delete"
-          onClick={() => onDelete(task.id)}
+          onClick={() => deleteTask(task.id)}
           title="Delete Task"
         >
           Delete
@@ -26,15 +34,24 @@ export default function TaskCard({ task, onStart, onFinish, onDelete }: CardProp
 
       <h3 className="task-card-title">{task.title}</h3>
 
+      <p className={`task-card-timer${task.status === "inProgress" ? " running" : ""}`}>
+        ⏱ {formatTime(seconds)}
+      </p>
 
       <div className="task-card-init">
         {task.status === "Pending" && (
-          <button className="task-btn task-btn-start" onClick={() => onStart(task.id)}>
+          <button
+            className="task-btn task-btn-start"
+            onClick={() => startTask(task.id)}
+          >
             Start
           </button>
         )}
         {task.status === "inProgress" && (
-          <button className="task-btn task-btn-finish" onClick={() => onFinish(task.id)}>
+          <button
+            className="task-btn task-btn-finish"
+            onClick={() => finishTask(task.id)}
+          >
             Finish
           </button>
         )}
