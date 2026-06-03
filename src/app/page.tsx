@@ -1,4 +1,4 @@
-import Home from "./pages/Home";
+import Home from "./home/Home";
 import "../app/globals.css"
 
 export default function HomeCharge() {
