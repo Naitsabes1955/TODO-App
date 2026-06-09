@@ -1,34 +1,43 @@
-import { NextResponse } from "next/server";
-
 export const getTodoList = async () => {
-  try {
-    const res = await fetch("/api/todolist");
-    return NextResponse.json(
-        {message: 'List of task obtained successful',
-        data: res},
-        {status: 200}
-    )
-  } catch (error) {
-    return NextResponse.json({
-      message: 'There was a error obtaining Tasks',
-      error: error instanceof Error ? error.message : 'Error unknowed'
-    }, { status: 500 });
-  }
+  const res = await fetch("/api/todolist");
+  if (!res.ok) throw new Error("Error obtaining tasks");
+  return res.json();
 };
 
+export const getTodoListById = async (id: string) => {
+  const res = await fetch(`/api/todolist/${id}`);
+  if (!res.ok) throw new Error("Error obtaining task by id");
+  return res.json();
+};
 
-export const getTodoListById = async (id:string) => {
-  try {
-    const res = await fetch(`/api/todolist/${id}`);
-    return NextResponse.json(
-        {message: 'Task obtained successful',
-        data: res},
-        {status: 200}
-    )
-    } catch (error) {
-    return NextResponse.json({
-      message: 'There was a error obtaining Task by id',
-      error: error instanceof Error ? error.message : 'Error unknowed'
-    }, { status: 500 });
-  }
+export const createTodo = async (title: string) => {
+  const res = await fetch("/api/todolist", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title }),
+  });
+  if (!res.ok) throw new Error("Error creating task");
+  return res.json();
+};
+
+export const deleteTodo = async (id: string) => {
+  const res = await fetch(`/api/todolist/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Error deleting task");
+  return res.json();
+};
+
+export const updateTodoStatus = async (
+  id: string,
+  status: string,
+  extra?: Record<string, unknown>
+) => {
+  const res = await fetch(`/api/todolist/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status, ...extra }),
+  });
+  if (!res.ok) throw new Error("Error updating task");
+  return res.json();
 };
