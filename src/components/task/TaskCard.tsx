@@ -16,7 +16,10 @@ export default function TaskCard({ task }: TaskCardProps) {
     task.status === "Pending"    ? "Pendiente"   :
     task.status === "inProgress" ? "En progreso" :
     "Finalizada";
-
+/* translate.status.pending
+translate.status.inProgress
+translate.status.done
+translate.taskCard.buttonDelete */
   return (
     <div className={`task-card${task.status.toLowerCase()}`}>
       <div className="task-card-header">

@@ -6,6 +6,8 @@ import TaskCard from "@/components/task/TaskCard";
 import TaskEmpty from "@/components/task/TaskEmpty";
 import { WithIcons } from "@/components/ui/ToggleButton";
 import { useTaskContext } from "@/context/TaskContext";
+import { LanguageSelector } from "@/components/language/LanguageSelector";
+import { useTranslation } from "@/context/i18nContext";
 import "@/styles/pages/home.css";
 
 
@@ -13,6 +15,7 @@ export default function Home() {
   const [title, setTitle] = useState<string>("");
 
   const { tasks, createTask } = useTaskContext();
+  const {translate} = useTranslation();
 
   function handleCreate(): void {
     const trimmed = title.trim();
@@ -25,16 +28,16 @@ export default function Home() {
     <div className="home">
       <WithIcons />
       <header className="home-header">
-        <h1>Task Timer</h1>
+        <h1>{translate.pageTitle}</h1>
       </header>
 
       <section className="home-form">
         <PressInput
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Write the name of your task..."
+          placeholder={translate.form.placeholder}
         />
-        <PressButton onClick={handleCreate}>Create</PressButton>
+        <PressButton> {translate.form.buttonCreate} </PressButton>
       </section>
 
       <section className="home-list">

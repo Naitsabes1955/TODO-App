@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Task, TaskStatus } from "../types/task";
+import { createTodo, deleteTodo, updateTodoStatus } from "@/services/todo";
 
 interface TaskContextValue {
   tasks: Task[];
@@ -38,7 +39,7 @@ export function TaskProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
   }, [tasks]);
 
-  function createTask(title: string): void {
+/*   function createTask(title: string): void {
     const newTask: Task = {
       id: crypto.randomUUID(),
       title,
@@ -48,23 +49,37 @@ export function TaskProvider({ children }: { children: ReactNode }) {
       createdAt: Date.now(),
     };
     setTasks((prev) => [...prev, newTask]);
-  }
+  } */
+    async function createTask(title:string): Promise<void>{
+      const newTask = await createTodo(title);
+      setTasks((actualTask) => [{ ...newTask, id: newTask._id}, ...actualTask]);
+    }
 
-  function deleteTask(id: string): void {
-    setTasks((prev) => prev.filter((t) => t.id !== id));
-  }
+    async function deleteTask(id: string): Promise<void> {
+      await deleteTodo(id);
+      setTasks((prev) => prev.filter((t) => t.id !== id));
+    }
 
-  function startTask(id: string): void {
-    setTasks((prev) =>
-      prev.map((t) =>
-        t.id === id
-          ? ({ ...t, status: "inProgress" as TaskStatus, startedAt: Date.now() })
-          : t
-      )
-    );
-  }
+    /* function startTask(id: string): void {
+      setTasks((prev) =>
+        prev.map((t) =>
+          t.id === id
+            ? ({ ...t, status: "inProgress" as TaskStatus, startedAt: Date.now() })
+            : t
+        )
+      );
+    } */
+    async function startTask(id: string): Promise<void>{
+      const startedAt = Date.now();
+      const updated = await updateTodoStatus(id,"inProgress",{startedAt});
+      setTasks((actualTask) => 
+        actualTask.map((t)=> 
+          t.id === id ? {...t,status: "inProgress" as TaskStatus,startedAt} : t
+        )
+      );
+    }
 
-  function finishTask(id: string): void {
+/*   function finishTask(id: string): void {
     setTasks((prev) =>
       prev.map((t) => {
         if (t.id !== id || !t.startedAt) return t;
@@ -78,8 +93,29 @@ export function TaskProvider({ children }: { children: ReactNode }) {
         };
       })
     );
-  }
+  } */
 
+    async function finishTask(id: string): Promise<void> {
+    const task = tasks.find((t) => t.id === id);
+    if (!task || !task.startedAt) return;
+    const elapsed = Math.floor((Date.now() - task.startedAt) / 1000);
+    const finalizedAt = Date.now();
+    const accumulatedTime = task.accumulatedTime + elapsed;
+    await updateTodoStatus(id, "Done", { finalizedAt, accumulatedTime, startedAt: null });
+    setTasks((actualTask) =>
+      actualTask.map((t) =>
+        t.id === id
+          ? {
+              ...t,
+              status: "Done" as TaskStatus,
+              accumulatedTime,
+              startedAt: null,
+              finalizedAt,
+            }
+          : t
+      )
+    );
+  }
   return (
     <TaskContext.Provider
       value={{ tasks, createTask, deleteTask, startTask, finishTask }}
@@ -90,9 +126,9 @@ export function TaskProvider({ children }: { children: ReactNode }) {
 }
 
 export function useTaskContext(): TaskContextValue {
-  const ctx = useContext(TaskContext);
-  if (!ctx) {
+  const context = useContext(TaskContext);
+  if (!context) {
     throw new Error("useTaskContext must be used inside a <TaskProvider>");
   }
-  return ctx;
+  return context;
 }
