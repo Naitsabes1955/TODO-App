@@ -2,6 +2,8 @@ import { useTaskContext } from "../../context/TaskContext";
 import { useTimer, formatTime } from "../../hooks/useTimer";
 import type { Task } from "../../types/task";
 import "../../styles/components/card.css";
+import { useTranslation } from "@/context/i18nContext";
+import { LanguageSelector } from "@/components/language/LanguageSelector";
 
 interface TaskCardProps {
   task: Task;
@@ -11,11 +13,12 @@ export default function TaskCard({ task }: TaskCardProps) {
   const { deleteTask, startTask, finishTask } = useTaskContext();
 
   const seconds = useTimer(task);
-
+  const {translate} = useTranslation();
+  
   const statusLabel =
-    task.status === "Pending"    ? "Pendiente"   :
-    task.status === "inProgress" ? "En progreso" :
-    "Finalizada";
+    task.status === "Pending"    ? translate.status.pending   :
+    task.status === "inProgress" ? translate.status.inProgress :
+    translate.status.done;
 /* translate.status.pending
 translate.status.inProgress
 translate.status.done
@@ -31,14 +34,14 @@ translate.taskCard.buttonDelete */
           onClick={() => deleteTask(task.id)}
           title="Delete Task"
         >
-          Delete
+          {translate.taskCard.buttonDelete}
         </button>
       </div>
 
       <h3 className="task-card-title">{task.title}</h3>
 
       <p className={`task-card-timer${task.status === "inProgress" ? " running" : ""}`}>
-        ⏱ {formatTime(seconds)}
+        {translate.timer.label} {formatTime(seconds)}
       </p>
 
       <div className="task-card-init">
@@ -47,7 +50,7 @@ translate.taskCard.buttonDelete */
             className="task-btn task-btn-start"
             onClick={() => startTask(task.id)}
           >
-            Start
+            {translate.taskCard.buttonStart}
           </button>
         )}
         {task.status === "inProgress" && (
@@ -55,7 +58,7 @@ translate.taskCard.buttonDelete */
             className="task-btn task-btn-finish"
             onClick={() => finishTask(task.id)}
           >
-            Finish
+            {translate.taskCard.buttonFinish}
           </button>
         )}
       </div>
