@@ -11,25 +11,25 @@ export const TaskSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["Pending" , "inProgress" , "Done"],
+    enum: ["Pending", "inProgress", "Done"],
     default: "Pending",
-  },    
-  accumulatedAt: {
+  },
+  accumulatedTime: {
     type: Number,
     default: 0,
   },
-  createdAt:{
-    type: Number,
-    default: 0,
-  },
-  startedAt:{
-    type: Number,
-    default: null
-  },
-  finalizedAt:{
+  createdAt: {
     type: Number,
     default: Date.now,
-  }
+  },
+  startedAt: {
+    type: Number,
+    default: null,
+  },
+  finalizedAt: {
+    type: Number,
+    default: null,
+  },
 });
 
 export const TaskModel =
