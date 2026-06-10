@@ -4,10 +4,10 @@ import { useTranslation } from "@/context/i18nContext";
 import { Language } from "@/locales/translations";
 
 const languages: { value: Language; label: string }[] = [
-  { value: "es", label: "ESPANOL" },
+  { value: "es", label: "ESPAÑOL" },
   { value: "en", label: "ENGLISH" },
-  { value: "pt", label: "PORTUGUES" },
-  { value: "ja", label: "JAPANESE" },
+  { value: "pt", label: "PORTUGUÊS" },
+  { value: "ja", label: "日本語" },
 ];
 
 export const LanguageSelector = () =>{
