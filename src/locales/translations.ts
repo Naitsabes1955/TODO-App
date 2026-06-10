@@ -10,8 +10,5 @@ export const translations = {
     ja
 };
 
-console.log(translations)
-
-
 export type Language = "es" | "en" | "pt" | "ja";
 export type Translations = typeof es;
