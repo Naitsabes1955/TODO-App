@@ -27,6 +27,7 @@ export default function Home() {
   return (
     <div className="home">
       <WithIcons />
+      <LanguageSelector/>
       <header className="home-header">
         <h1>{translate.pageTitle}</h1>
       </header>
@@ -37,7 +38,7 @@ export default function Home() {
           onChange={(e) => setTitle(e.target.value)}
           placeholder={translate.form.placeholder}
         />
-        <PressButton> {translate.form.buttonCreate} </PressButton>
+        <PressButton onClick={handleCreate}> {translate.form.buttonCreate} </PressButton>
       </section>
 
       <section className="home-list">
